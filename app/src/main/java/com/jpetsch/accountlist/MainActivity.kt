@@ -11,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jpetsch.accountlist.data.api.AccountService
@@ -43,7 +44,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.accountList.observe(this, {
             Log.d(TAG, "onCreate: $it")
-            adapter.setAccountList(it)
+            if (it != null) {
+                adapter.setAccountList(it)
+            } else {
+                Toast.makeText(applicationContext,"received no Account Data - Check Network or API endpoint",Toast.LENGTH_LONG).show()
+            }
         })
 
         viewModel.errorMessage.observe(this, {
