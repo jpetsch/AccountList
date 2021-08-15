@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             if (it != null) {
                 adapter.setAccountList(it)
             } else {
-                Toast.makeText(applicationContext,"received no Account Data - Check Network or API endpoint",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"Received no account data - Check network connection or API endpoint",Toast.LENGTH_LONG).show()
             }
         })
 

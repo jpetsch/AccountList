@@ -1,6 +1,7 @@
 package com.jpetsch.accountlist.ui.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,11 @@ class AccountAdapter: RecyclerView.Adapter<AccountViewHolder>() {
         holder.binding.iban.text = account.iban
         holder.binding.balance.text = account.balance.toString()
         holder.binding.currency.text = account.currency
+
+        if (account.balance < 0F) {
+            holder.binding.balance.setTextColor(Color.RED)
+            holder.binding.currency.setTextColor(Color.RED)
+        }
     }
 
     override fun getItemCount(): Int {

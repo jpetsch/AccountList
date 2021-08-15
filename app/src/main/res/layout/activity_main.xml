@@ -6,20 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.AccountList.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.AccountList.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.AccountList.AppBarOverlay">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.AccountList.PopupOverlay" />
 
-    <include layout="@layout/content_main" android:id="@+id/included_recyclerview"/>
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:overScrollMode="always"
+            android:isScrollContainer="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical">
+
+            <include layout="@layout/content_main" android:id="@+id/included_recyclerview"/>
+
+        </ScrollView>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
