@@ -24,18 +24,24 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity"
-            android:overScrollMode="always"
-            android:isScrollContainer="true"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarStyle="outsideInset"
-            android:scrollbars="vertical">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <include layout="@layout/content_main" android:id="@+id/included_recyclerview"/>
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity"
+                android:overScrollMode="always"
+                android:isScrollContainer="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="vertical">
 
-        </ScrollView>
+                <include layout="@layout/content_main" android:id="@+id/included_recyclerview"/>
+
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

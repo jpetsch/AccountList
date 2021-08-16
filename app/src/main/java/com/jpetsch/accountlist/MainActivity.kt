@@ -1,54 +1,62 @@
 package com.jpetsch.accountlist
 
-import android.accounts.Account
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jpetsch.accountlist.data.api.AccountService
 import com.jpetsch.accountlist.data.repository.AccountRepository
 import com.jpetsch.accountlist.databinding.ActivityMainBinding
 import com.jpetsch.accountlist.ui.adapter.AccountAdapter
 import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModel
 import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModelFactory
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    lateinit var viewModel: AccountViewModel
+    private lateinit var viewModel: AccountViewModel
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private val retrofitService = AccountService.getInstance()
-    val adapter = AccountAdapter()
+    private val adapter: AccountAdapter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
         viewModel = ViewModelProvider(this, AccountViewModelFactory(AccountRepository(retrofitService))).get(AccountViewModel::class.java)
 
         binding.includedRecyclerview.recyclerview.adapter = adapter
 
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.d(TAG, "onRefresh called from SwipeRefreshLayout")
+            //swipeRefreshLayout.isRefreshing = true
+            // This method performs the actual data-refresh operation.
+            // The method calls setRefreshing(false) when it's finished.
+            refreshAccountData()
+        }
+
         viewModel.accountList.observe(this, {
             Log.d(TAG, "onCreate: $it")
             if (it != null) {
                 adapter.setAccountList(it)
+                Toast.makeText(applicationContext,"Received data",Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(applicationContext,"Received no account data - Check network connection or API endpoint",Toast.LENGTH_LONG).show()
             }
+
+            swipeRefreshLayout.isRefreshing = false
         })
 
         viewModel.errorMessage.observe(this, {
@@ -69,7 +77,16 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.menu_refresh -> {
+                swipeRefreshLayout.isRefreshing = true
+                refreshAccountData()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun refreshAccountData() {
+        viewModel.getAllAccounts()
     }
 }

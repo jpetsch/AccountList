@@ -27,4 +27,8 @@ class AccountViewModel constructor(private val repository: AccountRepository): V
         })
     }
 
+    fun clearAccounts() {
+        accountList
+    }
+
 }
