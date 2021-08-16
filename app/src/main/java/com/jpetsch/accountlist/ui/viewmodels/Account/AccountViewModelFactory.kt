@@ -2,6 +2,7 @@ package com.jpetsch.accountlist.ui.viewmodels.Account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jpetsch.accountlist.R
 import com.jpetsch.accountlist.data.repository.AccountRepository
 
 class AccountViewModelFactory constructor(private val repository: AccountRepository): ViewModelProvider.Factory {
@@ -11,7 +12,7 @@ class AccountViewModelFactory constructor(private val repository: AccountReposit
         return if (modelClass.isAssignableFrom(AccountViewModel::class.java)) {
             AccountViewModel(this.repository) as T
         } else {
-            throw IllegalArgumentException("Account ViewModel not found")
+            throw IllegalArgumentException(R.string.no_account_vm.toString())
         }
     }
 }

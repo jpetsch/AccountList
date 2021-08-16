@@ -1,5 +1,6 @@
 package com.jpetsch.accountlist.data.api
 
+import com.jpetsch.accountlist.BuildConfig
 import com.jpetsch.accountlist.data.model.Account
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -12,15 +13,13 @@ interface AccountService {
 
 
     companion object {
-        const val BASE_URL = "https://bankingapi.free.beeceptor.com/"
-
         var accountService: AccountService? = null
 
         fun getInstance() : AccountService {
 
             if (accountService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BuildConfig.API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 accountService = retrofit.create(AccountService::class.java)

@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
         binding.includedRecyclerview.recyclerview.adapter = adapter
 
         swipeRefreshLayout.setOnRefreshListener {
-            Log.d(TAG, "onRefresh called from SwipeRefreshLayout")
-            //swipeRefreshLayout.isRefreshing = true
-            // This method performs the actual data-refresh operation.
-            // The method calls setRefreshing(false) when it's finished.
             refreshAccountData()
         }
 
@@ -51,9 +47,9 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: $it")
             if (it != null) {
                 adapter.setAccountList(it)
-                Toast.makeText(applicationContext,"Received data",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,R.string.received_account_data,Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(applicationContext,"Received no account data - Check network connection or API endpoint",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,R.string.no_account_data,Toast.LENGTH_LONG).show()
             }
 
             swipeRefreshLayout.isRefreshing = false

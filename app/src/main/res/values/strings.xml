@@ -4,5 +4,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <!-- AccountList -->
     <string name="menu_refresh">Refresh</string>
+    <string name="no_account_data">Received no account data - Check network connection or API endpoint</string>
+    <string name="received_account_data">Received account data</string>
+    <string name="no_account_vm">Account ViewModel not found</string>
 </resources>
