@@ -1,3 +1,11 @@
 <resources>
-    <dimen name="fab_margin">48dp</dimen>
+    <dimen name="account_data_text_height">60dp</dimen>
+    <dimen name="account_data_card_margin">12dp</dimen>
+    <dimen name="account_data_card_corner_radius">8dp</dimen>
+    <dimen name="account_data_card_elevation">12dp</dimen>>
+    <dimen name="account_data_margin_border">25dp</dimen>
+    <dimen name="account_data_margin_text">5dp</dimen>
+    <dimen name="account_data_text_size_name">30sp</dimen>
+    <dimen name="account_data_text_size_iban">25sp</dimen>
+    <dimen name="account_data_text_size_balance">25sp</dimen>
 </resources>

@@ -16,6 +16,9 @@ import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModel
 import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModelFactory
 import org.koin.android.ext.android.inject
 
+
+
+
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
