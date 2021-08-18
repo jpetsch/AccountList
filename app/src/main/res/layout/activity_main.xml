@@ -24,24 +24,12 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                tools:context=".MainActivity"
-                android:overScrollMode="always"
-                android:isScrollContainer="true"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbarStyle="outsideInset"
-                android:scrollbars="vertical">
 
-                <include layout="@layout/content_main" android:id="@+id/included_recyclerview"/>
-
-            </ScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

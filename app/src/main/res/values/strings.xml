@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">AccountList</string>
+    <string name="action_account_list">AccountList</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
     <!-- AccountList -->
     <string name="menu_refresh">Refresh</string>
     <string name="no_account_data">Received no account data - Check network connection or API endpoint</string>

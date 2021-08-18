@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/swipeRefreshLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="always"
+    android:isScrollContainer="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical">
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/adapter_account"
+            tools:itemCount="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </RelativeLayout>
+
+</ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
