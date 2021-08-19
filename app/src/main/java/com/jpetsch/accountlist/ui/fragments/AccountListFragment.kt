@@ -26,7 +26,7 @@ class AccountListFragment : Fragment(R.layout.account_fragment) {
     private lateinit var viewModel: AccountViewModel
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-    private val retrofitService = AccountService.getInstance()
+    private val accountService: AccountService by inject()
     private val adapter: AccountAdapter by inject()
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class AccountListFragment : Fragment(R.layout.account_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-        viewModel = ViewModelProvider(this, AccountViewModelFactory(AccountRepository(retrofitService))).get(
+        viewModel = ViewModelProvider(this, AccountViewModelFactory(AccountRepository(accountService))).get(
             AccountViewModel::class.java)
 
         accountFragmentBinding.recyclerview.adapter = adapter
