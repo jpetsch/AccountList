@@ -2,7 +2,6 @@ package com.jpetsch.accountlist.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,10 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jpetsch.accountlist.R
 import com.jpetsch.accountlist.data.model.Account
 import com.jpetsch.accountlist.databinding.AdapterAccountBinding
+import com.jpetsch.accountlist.ui.fragments.AccountTransactionsFragment
 
 class AccountAdapter(private val context: Context): RecyclerView.Adapter<AccountViewHolder>() {
 
     var accounts = mutableListOf<Account>()
+
+    lateinit var clickedAccountBinding: AdapterAccountBinding
+    var clickedAccountId: Int = 0
+
+    private var listener: (() -> Unit)? = null
+
+    fun setListener(listener: (() -> Unit)?) {
+        this.listener = listener
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setAccountList(accounts: List<Account>) {
@@ -26,6 +35,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         val inflater = LayoutInflater.from(parent.context)
 
         val binding = AdapterAccountBinding.inflate(inflater, parent, false)
+
         return AccountViewHolder(binding)
     }
 
@@ -43,11 +53,22 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
             holder.binding.balance.setTextColor(ContextCompat.getColor(context, R.color.spk_green))
             holder.binding.currency.setTextColor(ContextCompat.getColor(context, R.color.spk_green))
         }
+
+        holder.binding.accountListItem.setOnClickListener {
+            clickedAccountBinding = holder.binding
+            clickedAccountId = position
+            listener?.invoke()
+        }
     }
 
     override fun getItemCount(): Int {
         return accounts.size
     }
+
+    fun setAccount(accountTransactionsFragment: AccountTransactionsFragment) {
+        accountTransactionsFragment.setAccount(clickedAccountBinding, clickedAccountId)
+    }
+
 }
 
 class AccountViewHolder(val binding: AdapterAccountBinding) : RecyclerView.ViewHolder(binding.root) {

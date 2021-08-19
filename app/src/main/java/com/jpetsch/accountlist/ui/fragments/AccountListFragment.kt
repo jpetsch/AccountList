@@ -1,5 +1,6 @@
 package com.jpetsch.accountlist.ui.fragments
 
+import android.accounts.Account
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jpetsch.accountlist.data.api.AccountService
 import com.jpetsch.accountlist.data.repository.AccountRepository
-import com.jpetsch.accountlist.databinding.AccountFragmentBinding
+import com.jpetsch.accountlist.databinding.AccountListFragmentBinding
 import com.jpetsch.accountlist.ui.adapter.AccountAdapter
 import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModel
 import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModelFactory
@@ -19,22 +20,24 @@ import org.koin.android.ext.android.inject
 import com.jpetsch.accountlist.R
 
 
-class AccountListFragment : Fragment(R.layout.account_fragment) {
+class AccountListFragment : Fragment(R.layout.account_list_fragment) {
     private val TAG = "AccountListFragment"
 
-    private lateinit var accountFragmentBinding: AccountFragmentBinding
+    private lateinit var accountFragmentBinding: AccountListFragmentBinding
     private lateinit var viewModel: AccountViewModel
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private val retrofitService = AccountService.getInstance()
     private val adapter: AccountAdapter by inject()
 
+    private val accountTransactionsFragment = AccountTransactionsFragment()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        accountFragmentBinding = AccountFragmentBinding.inflate(layoutInflater, container,false)
+        accountFragmentBinding = AccountListFragmentBinding.inflate(layoutInflater, container,false)
         return accountFragmentBinding.root
     }
 
@@ -66,6 +69,14 @@ class AccountListFragment : Fragment(R.layout.account_fragment) {
 
         })
         viewModel.getAllAccounts()
+
+        adapter.setListener {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.main_fragment_container, accountTransactionsFragment)?.commit()
+
+            adapter.setAccount(accountTransactionsFragment)
+        }
+
     }
 
     private fun refreshAccountData() {
