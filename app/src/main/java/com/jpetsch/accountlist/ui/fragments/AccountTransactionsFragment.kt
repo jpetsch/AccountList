@@ -11,7 +11,7 @@ import android.widget.TextView
 
 
 
-class AccountTransactionsFragment: Fragment(R.layout.account_transactions_fragment) {
+class AccountTransactionsFragment(): Fragment(R.layout.account_transactions_fragment) {
     private lateinit var adapterAccountBinding: AdapterAccountBinding
     private var accountId: Int = 0
 

@@ -12,15 +12,13 @@ import com.jpetsch.accountlist.databinding.AdapterAccountBinding
 import com.jpetsch.accountlist.ui.fragments.AccountTransactionsFragment
 
 class AccountAdapter(private val context: Context): RecyclerView.Adapter<AccountViewHolder>() {
-
     var accounts = mutableListOf<Account>()
 
-    lateinit var clickedAccountBinding: AdapterAccountBinding
-    var clickedAccountId: Int = 0
-
+    lateinit var accountTransactionsFragment: AccountTransactionsFragment
     private var listener: (() -> Unit)? = null
 
-    fun setListener(listener: (() -> Unit)?) {
+    fun setListener(accountTransactionsFragment: AccountTransactionsFragment, listener: (() -> Unit)?) {
+        this.accountTransactionsFragment = accountTransactionsFragment
         this.listener = listener
     }
 
@@ -55,8 +53,7 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
         }
 
         holder.binding.accountListItem.setOnClickListener {
-            clickedAccountBinding = holder.binding
-            clickedAccountId = position
+            accountTransactionsFragment.setAccount(holder.binding, position)
             listener?.invoke()
         }
     }
@@ -64,11 +61,6 @@ class AccountAdapter(private val context: Context): RecyclerView.Adapter<Account
     override fun getItemCount(): Int {
         return accounts.size
     }
-
-    fun setAccount(accountTransactionsFragment: AccountTransactionsFragment) {
-        accountTransactionsFragment.setAccount(clickedAccountBinding, clickedAccountId)
-    }
-
 }
 
 class AccountViewHolder(val binding: AdapterAccountBinding) : RecyclerView.ViewHolder(binding.root) {

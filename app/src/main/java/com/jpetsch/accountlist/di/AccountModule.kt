@@ -1,6 +1,7 @@
 package com.jpetsch.accountlist.di
 
 import com.jpetsch.accountlist.ui.adapter.AccountAdapter
+import com.jpetsch.accountlist.ui.fragments.AccountTransactionsFragment
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

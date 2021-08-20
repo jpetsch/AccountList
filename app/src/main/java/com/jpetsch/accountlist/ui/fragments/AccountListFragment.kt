@@ -28,9 +28,7 @@ class AccountListFragment : Fragment(R.layout.account_list_fragment) {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private val retrofitService = AccountService.getInstance()
-    private val adapter: AccountAdapter by inject()
-
-    private val accountTransactionsFragment = AccountTransactionsFragment()
+    val adapter: AccountAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,11 +68,11 @@ class AccountListFragment : Fragment(R.layout.account_list_fragment) {
         })
         viewModel.getAllAccounts()
 
-        adapter.setListener {
+        val accountTransactionsFragment = AccountTransactionsFragment()
+        adapter.setListener(accountTransactionsFragment) {
+
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.main_fragment_container, accountTransactionsFragment)?.commit()
-
-            adapter.setAccount(accountTransactionsFragment)
         }
 
     }
