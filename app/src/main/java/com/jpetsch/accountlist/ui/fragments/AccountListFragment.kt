@@ -13,8 +13,8 @@ import com.jpetsch.accountlist.data.api.AccountService
 import com.jpetsch.accountlist.data.repository.AccountRepository
 import com.jpetsch.accountlist.databinding.AccountFragmentBinding
 import com.jpetsch.accountlist.ui.adapter.AccountAdapter
-import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModel
-import com.jpetsch.accountlist.ui.viewmodels.Account.AccountViewModelFactory
+import com.jpetsch.accountlist.ui.viewmodels.account.AccountViewModel
+import com.jpetsch.accountlist.ui.viewmodels.account.AccountViewModelFactory
 import org.koin.android.ext.android.inject
 import com.jpetsch.accountlist.R
 

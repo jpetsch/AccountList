@@ -1,4 +1,4 @@
-package com.jpetsch.accountlist.ui.viewmodels.Account
+package com.jpetsch.accountlist.ui.viewmodels.account
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,9 +26,4 @@ class AccountViewModel constructor(private val repository: AccountRepository): V
             }
         })
     }
-
-    fun clearAccounts() {
-        accountList
-    }
-
 }

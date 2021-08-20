@@ -1,4 +1,4 @@
-package com.jpetsch.accountlist.ui.viewmodels.Account
+package com.jpetsch.accountlist.ui.viewmodels.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

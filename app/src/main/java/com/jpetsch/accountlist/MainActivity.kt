@@ -9,6 +9,9 @@ import com.jpetsch.accountlist.databinding.ActivityMainBinding
 import com.jpetsch.accountlist.ui.fragments.AccountListFragment
 import com.jpetsch.accountlist.ui.fragments.SettingsFragment
 
+/**
+ * Created by Jenö Petsch / jenoe.petsch@gmail.com on 13/08/21.
+ */
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
